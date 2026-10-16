@@ -217,14 +217,17 @@ def print_header(data, outstream):
         return
 
     ind = lines.index(until) + 1
-    header_length = len("".join(lines[:ind]))
+    page_files = lines[:ind]
+    header_length = len("".join(page_files))
     def adjust(name):
         return name if name.startswith('.') else name.split('.')[0]
-    # Keep the running header compact enough to coexist with the team name.
-    output = r"\enspace{}".join(map(adjust, lines[max(0, ind - 2):ind]))
-    font_size = 10
+    # List all source files on this page, shrinking the text when necessary.
+    output = r"\enspace{}".join(map(adjust, page_files))
+    font_size = 8
     if header_length > 150:
-        font_size = 8
+        font_size = 6
+    if header_length > 300:
+        font_size = 4
     output = r"\hspace{3mm}\textbf{" + output + "}"
     output = "\\fontsize{%d}{%d}" % (font_size, font_size) + output
     print(output, file=outstream)

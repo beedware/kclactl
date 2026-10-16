@@ -67,7 +67,7 @@
 \AtBeginDocument{\immediate\write18{rm -f \@builddir/header.tmp}}
 \AtEndDocument{\immediate\write18{rm -f \@builddir/header.tmp}\immediate\write18{rm -f \@builddir/header2.tmp}\immediate\write18{rm -f \@builddir/kactl.tmp}}
 
-% Include a list of source files at the top of every page. For the purpose
+% Include a list of all source files at the top of every page. For the purpose
 % of recording those, we use eTeX marks. (We can't just append data directly to
 % the header, because TeX outputs pages asynchronously, noticeably so when
 % multicol is in use.) There is no command for getting all marks set on a page,
@@ -122,6 +122,7 @@
 	\setcounter{tocdepth}{8}
 	\setcounter{chapter}{0}
 	\def\thechapter{\Alph{chapter}}
+	\renewcommand{\theHchapter}{appendix.\Alph{chapter}}
 	% Switch to appendixmode defined above (disables TOC entries)
 	\setboolean{appendixmode}{true}
 	\clearpage
