@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -O3 -g -std=c++20 -Wall -Werror
+CXXFLAGS := -O3 -Wall -Wconversion -Wfatal-errors -g -std=c++20
 
 .DEFAULT_GOAL := help
 
