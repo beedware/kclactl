@@ -1,15 +1,8 @@
 CXX := g++
-CXXFLAGS := -O3 -Wall -Wconversion -Wfatal-errors -g -std=c++20
+CXXFLAGS := -O2 -Wall -Wextra -Wshadow -Wfatal-errors -std=c++23 -fsanitize=address,undefined -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC
 
-.DEFAULT_GOAL := help
+a: a.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
 
-.PHONY: clean help
-help:
-	@echo "Usage: make <program> (builds <program>.cpp into out/<program>)"
-
-%: %.cpp
-	mkdir -p out
-	$(CXX) $(CXXFLAGS) $< -o out/$@
-
-clean:
-	rm -rf out
+r: a
+	./a
