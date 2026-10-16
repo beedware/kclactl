@@ -19,15 +19,15 @@
 
 template <bool VALS_EDGES> struct HLD {
 	int N, tim = 0;
-	vector<vi> adj;
-	vi par, siz, rt, pos;
+	vector<vector<int>> adj;
+	vector<int> par, siz, rt, pos;
 	Node *tree;
-	HLD(vector<vi> adj_)
-		: N(sz(adj_)), adj(adj_), par(N, -1), siz(N, 1),
+	HLD(vector<vector<int>> adj_)
+		: N((int)adj_.size()), adj(adj_), par(N, -1), siz(N, 1),
 		  rt(N),pos(N),tree(new Node(0, N)){ dfsSz(0); dfsHld(0); }
 	void dfsSz(int v) {
 		for (int& u : adj[v]) {
-			adj[u].erase(find(all(adj[u]), v));
+			adj[u].erase(find(adj[u].begin(), adj[u].end(), v));
 			par[u] = v;
 			dfsSz(u);
 			siz[v] += siz[u];

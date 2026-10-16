@@ -24,13 +24,13 @@ struct H {
 	bool operator==(H o) const { return get() == o.get(); }
 	bool operator<(H o) const { return get() < o.get(); }
 };
-static const H C = (ll)1e11+3; // (order ~ 3e9; random also ok)
+static const H C = (long long)1e11+3; // (order ~ 3e9; random also ok)
 
 struct HashInterval {
 	vector<H> ha, pw;
-	HashInterval(string& str) : ha(sz(str)+1), pw(ha) {
+	HashInterval(string& str) : ha((int)str.size()+1), pw(ha) {
 		pw[0] = 1;
-		rep(i,0,sz(str))
+		for (int i = 0; i < (int)str.size(); ++i)
 			ha[i+1] = ha[i] * C + str[i],
 			pw[i+1] = pw[i] * C;
 	}
@@ -40,12 +40,12 @@ struct HashInterval {
 };
 
 vector<H> getHashes(string& str, int length) {
-	if (sz(str) < length) return {};
+	if ((int)str.size() < length) return {};
 	H h = 0, pw = 1;
-	rep(i,0,length)
+	for (int i = 0; i < length; ++i)
 		h = h * C + str[i], pw = pw * C;
 	vector<H> ret = {h};
-	rep(i,length,sz(str)) {
+	for (int i = length; i < (int)str.size(); ++i) {
 		ret.push_back(h = h * C + str[i] - pw * str[i-length]);
 	}
 	return ret;

@@ -15,20 +15,20 @@
 #pragma once
 
 template<class T>
-pair<T, vi> weightedMatching(vector<vector<T>> &C) {
-	int i = sz(C), m = i ? sz(C[0]) : 0, c, s, r;
+pair<T, vector<int>> weightedMatching(vector<vector<T>> &C) {
+	int i = (int)C.size(), m = i ? (int)C[0].size() : 0, c, s, r;
 	vector<T> dist(m), pot(m);
-	vi match(i), rev(m, -1), cols(m), prev(m);
+	vector<int> match(i), rev(m, -1), cols(m), prev(m);
 	T d = 0, nd, cost = 0;
 	while (i--) {
-		rep(c,0,m) dist[c] = C[i][c], cols[c] = c, prev[c] = i;
+		for (int c = 0; c < m; ++c) dist[c] = C[i][c], cols[c] = c, prev[c] = i;
 		for (s = 0;;) {
-			rep(j,s,m) {
+			for (int j = s; j < m; ++j) {
 				c = cols[j], nd = dist[c] - pot[c];
 				if (j == s || d > nd) d = nd, swap(cols[s], cols[j]);
 			}
 			if ((r = rev[c = cols[s++]]) == -1) break;
-			rep(j,0,m) if (dist[j] > (nd = C[r][j]-C[r][c]+dist[c]))
+			for (int j = 0; j < m; ++j) if (dist[j] > (nd = C[r][j]-C[r][c]+dist[c]))
 				dist[j] = nd, prev[j] = r;
 		}
 		cost += dist[c];

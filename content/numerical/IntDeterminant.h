@@ -9,14 +9,14 @@
  */
 #pragma once
 
-const ll mod = 12345;
-ll det(vector<vector<ll>>& a) {
-	int n = sz(a); ll ans = 1;
-	rep(i,0,n) {
-		rep(j,i+1,n) {
+const long long mod = 12345;
+long long det(vector<vector<long long>>& a) {
+	int n = (int)a.size(); long long ans = 1;
+	for (int i = 0; i < n; ++i) {
+		for (int j = i+1; j < n; ++j) {
 			while (a[j][i] != 0) { // gcd step
-				ll t = a[i][i] / a[j][i];
-				if (t) rep(k,i,n)
+				long long t = a[i][i] / a[j][i];
+				if (t) for (int k = i; k < n; ++k)
 					a[i][k] = (a[i][k] - a[j][k] * t) % mod;
 				swap(a[i], a[j]);
 				ans *= -1;

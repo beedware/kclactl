@@ -66,6 +66,6 @@ vector<ull> factor(ull n) {
 	if (isPrime(n)) return {n};
 	ull x = pollard(n);
 	auto l = factor(x), r = factor(n / x);
-	l.insert(l.end(), all(r));
+	l.insert(l.end(), r.begin(), r.end());
 	return l;
 }

@@ -21,8 +21,8 @@
 
 struct TwoSat {
 	int N;
-	vector<vi> gr;
-	vi values; // 0 = false, 1 = true
+	vector<vector<int>> gr;
+	vector<int> values; // 0 = false, 1 = true
 
 	TwoSat(int n = 0) : N(n), gr(2*n) {}
 
@@ -40,10 +40,10 @@ struct TwoSat {
 	}
 	void setValue(int x) { either(x, x); }
 
-	void atMostOne(const vi& li) { // (optional)
-		if (sz(li) <= 1) return;
+	void atMostOne(const vector<int>& li) { // (optional)
+		if ((int)li.size() <= 1) return;
 		int cur = ~li[0];
-		rep(i,2,sz(li)) {
+		for (int i = 2; i < (int)li.size(); ++i) {
 			int next = addVar();
 			either(cur, ~li[i]);
 			either(cur, next);
@@ -53,7 +53,7 @@ struct TwoSat {
 		either(cur, ~li[1]);
 	}
 
-	vi val, comp, z; int time = 0;
+	vector<int> val, comp, z; int time = 0;
 	int dfs(int i) {
 		int low = val[i] = ++time, x; z.push_back(i);
 		for(int e : gr[i]) if (!comp[e])
@@ -70,8 +70,8 @@ struct TwoSat {
 	bool solve() {
 		values.assign(N, -1);
 		val.assign(2*N, 0); comp = val;
-		rep(i,0,2*N) if (!comp[i]) dfs(i);
-		rep(i,0,N) if (comp[2*i] == comp[2*i+1]) return 0;
+		for (int i = 0; i < 2*N; ++i) if (!comp[i]) dfs(i);
+		for (int i = 0; i < N; ++i) if (comp[2*i] == comp[2*i+1]) return 0;
 		return 1;
 	}
 };

@@ -42,8 +42,8 @@ hashing ignores whitespace and comments.
 
 ## Coding style
 
-KCLACTL uses a relatively terse coding style, with a handful of macros/typedefs defined in the
-[template](./content/contest/template.cpp) that help shorten the code.
+KCLACTL uses a clean coding style with standard C++ conventions and a minimalist
+[template](./content/contest/template.cpp) for contests.
 Line width is 63 chars, with tabs for indentation (tab = 2 spaces in the pdf).
 
 Each algorithm contains a header with the author of the code, the date it

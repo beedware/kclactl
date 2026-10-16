@@ -1,35 +1,35 @@
 /**
- * Author: Lucian Bicsi
- * Date: 2018-02-14
+ * Author: Lawrence Luo, Simon Lindholm
+ * Date: 2020-08-04
  * License: CC0
- * Source: Chinese material
+ * Source: http://people.csail.mit.edu/virgi/6.890/lecture5.pdf
  * Description: Generates the $k$'th term of an $n$-order
  * linear recurrence $S[i] = \sum_j S[i-j-1]tr[j]$,
- * given $S[0 \ldots \ge n-1]$ and $tr[0 \ldots n-1]$.
+ * given $S[0 \dots \ge n-1]$ and $tr[0 \dots n-1]$.
  * Faster than matrix multiplication.
- * Useful together with Berlekamp--Massey.
+ * Useful after Berlekamp-Massey.
  * Usage: linearRec({0, 1}, {1, 1}, k) // k'th Fibonacci number
- * Time: O(n^2 \log k)
- * Status: bruteforce-tested mod 5 for n <= 5
+ * Time: O(n \log n \log k)
+ * Status: stress-tested
  */
 #pragma once
 
-const ll mod = 5; /** exclude-line */
+#include "FastFourierTransform.h"
 
-typedef vector<ll> Poly;
-ll linearRec(Poly S, Poly tr, ll k) {
-	int n = sz(tr);
-
+const long long mod = 5; /** exclude-line */
+typedef vector<double> Poly; /** exclude-line */
+typedef vector<long long> Poly;
+long long linearRec(Poly S, Poly tr, long long k) {
+	int n = (int)tr.size();
 	auto combine = [&](Poly a, Poly b) {
 		Poly res(n * 2 + 1);
-		rep(i,0,n+1) rep(j,0,n+1)
+		for (int i = 0; i < n+1; ++i) for (int j = 0; j < n+1; ++j)
 			res[i + j] = (res[i + j] + a[i] * b[j]) % mod;
-		for (int i = 2 * n; i > n; --i) rep(j,0,n)
+		for (int i = 2 * n; i > n; --i) for (int j = 0; j < n; ++j)
 			res[i - 1 - j] = (res[i - 1 - j] + res[i] * tr[j]) % mod;
 		res.resize(n + 1);
 		return res;
 	};
-
 	Poly pol(n + 1), e(pol);
 	pol[0] = e[1] = 1;
 
@@ -38,7 +38,7 @@ ll linearRec(Poly S, Poly tr, ll k) {
 		e = combine(e, e);
 	}
 
-	ll res = 0;
-	rep(i,0,n) res = (res + pol[i + 1] * S[i]) % mod;
+	long long res = 0;
+	for(int i=0; i<n; ++i) res = (res + pol[i+1]*S[i]) % mod;
 	return res;
 }

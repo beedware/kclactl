@@ -13,12 +13,12 @@
  */
 #pragma once
 
-vi edgeColoring(int N, vector<pii> eds) {
-	vi cc(N + 1), ret(sz(eds)), fan(N), free(N), loc;
-	for (pii e : eds) ++cc[e.first], ++cc[e.second];
-	int u, v, ncols = *max_element(all(cc)) + 1;
-	vector<vi> adj(N, vi(ncols, -1));
-	for (pii e : eds) {
+vector<int> edgeColoring(int N, vector<pair<int, int>> eds) {
+	vector<int> cc(N + 1), ret((int)eds.size()), fan(N), free(N), loc;
+	for (pair<int, int> e : eds) ++cc[e.first], ++cc[e.second];
+	int u, v, ncols = *max_element(cc.begin(), cc.end()) + 1;
+	vector<vector<int>> adj(N, vector<int>(ncols, -1));
+	for (pair<int, int> e : eds) {
 		tie(u, v) = e;
 		fan[0] = v;
 		loc.assign(ncols, 0);
@@ -40,7 +40,7 @@ vi edgeColoring(int N, vector<pii> eds) {
 		for (int y : {fan[0], u, end})
 			for (int& z = free[y] = 0; adj[y][z] != -1; z++);
 	}
-	rep(i,0,sz(eds))
+	for (int i = 0; i < (int)eds.size(); ++i)
 		for (tie(u, v) = eds[i]; adj[u][ret[i]] != v;) ++ret[i];
 	return ret;
 }

@@ -15,11 +15,11 @@
 
 struct LCA {
 	int T = 0;
-	vi time, path, ret;
+	vector<int> time, path, ret;
 	RMQ<int> rmq;
 
-	LCA(vector<vi>& C) : time(sz(C)), rmq((dfs(C,0,-1), ret)) {}
-	void dfs(vector<vi>& C, int v, int par) {
+	LCA(vector<vector<int>>& C) : time((int)C.size()), rmq((dfs(C,0,-1), ret)) {}
+	void dfs(vector<vector<int>>& C, int v, int par) {
 		time[v] = T++;
 		for (int y : C[v]) if (y != par) {
 			path.push_back(v), ret.push_back(time[v]);

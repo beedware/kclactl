@@ -6,7 +6,7 @@
  * Description: Finds strongly connected components in a
  * directed graph. If vertices $u, v$ belong to the same component,
  * we can reach $u$ from $v$ and vice versa.
- * Usage: scc(graph, [\&](vi\& v) { ... }) visits all components
+ * Usage: scc(graph, [\&](vector<int>\& v) { ... }) visits all components
  * in reverse topological order. comp[i] holds the component
  * index of a node (a component only has edges to components with
  * lower index). ncomps will contain the number of components.
@@ -15,7 +15,7 @@
  */
 #pragma once
 
-vi val, comp, z, cont;
+vector<int> val, comp, z, cont;
 int Time, ncomps;
 template<class G, class F> int dfs(int j, G& g, F& f) {
 	int low = val[j] = ++Time, x; z.push_back(j);
@@ -34,8 +34,8 @@ template<class G, class F> int dfs(int j, G& g, F& f) {
 	return val[j] = low;
 }
 template<class G, class F> void scc(G& g, F f) {
-	int n = sz(g);
+	int n = (int)g.size();
 	val.assign(n, 0); comp.assign(n, -1);
 	Time = ncomps = 0;
-	rep(i,0,n) if (comp[i] < 0) dfs(i, g, f);
+	for (int i = 0; i < n; ++i) if (comp[i] < 0) dfs(i, g, f);
 }

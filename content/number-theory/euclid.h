@@ -8,8 +8,9 @@
  */
 #pragma once
 
-ll euclid(ll a, ll b, ll &x, ll &y) {
+long long euclid(long long a, long long b,
+                 long long &x, long long &y) {
 	if (!b) return x = 1, y = 0, a;
-	ll d = euclid(b, a % b, y, x);
+	long long d = euclid(b, a % b, y, x);
 	return y -= a/b * x, d;
 }

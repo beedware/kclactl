@@ -14,21 +14,21 @@
  */
 #pragma once
 
-/// Headers and macros from contest/template.h are automatically included.
+/// Headers from contest/template.cpp are automatically included.
 
 #include "Example.h" /// Header name will be kept in final list.
 
 struct ExampleStructure {
-	ll alpha;
-	pii nodes;
-	vi edges;
+	long long alpha;
+	pair<int, int> nodes;
+	vector<int> edges;
 };
 
-int exampleFunction1(vi mice, int* cats, int catsCount) {
+int exampleFunction1(vector<int> mice, int* cats, int catsCount) {
 	/// This is a stupid comment that will be removed.
 	int sum = 0;
 
-	rep(i, 1, catsCount) {
+	for (int i = 1; i < catsCount; ++i) {
 		// This comment will be kept!
 		for (auto it : mice) {
 			/// This will be removed.

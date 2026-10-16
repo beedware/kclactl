@@ -8,7 +8,7 @@
 If a unique intersection point between the line segments going from s1 to e1 and from s2 to e2 exists then it is returned.
 If no intersection point exists an empty vector is returned.
 If infinitely many exist a vector with 2 elements is returned, containing the endpoints of the common line segment.
-The wrong position will be returned if P is Point<ll> and the intersection point does not have integer coordinates.
+The wrong position will be returned if P is Point<long long> and the intersection point does not have integer coordinates.
 Products of three coordinates are used in intermediate steps so watch out for overflow if using int or long long.
 \end{minipage}
 \begin{minipage}{15mm}
@@ -16,7 +16,7 @@ Products of three coordinates are used in intermediate steps so watch out for ov
 \end{minipage}
  * Usage:
  * vector<P> inter = segInter(s1,e1,s2,e2);
- * if (sz(inter)==1)
+ * if ((int)inter.size()==1)
  *   cout << "segments intersect at " << inter[0] << endl;
  * Status: stress-tested, tested on kattis:intersection
  */
@@ -36,5 +36,5 @@ template<class P> vector<P> segInter(P a, P b, P c, P d) {
 	if (onSegment(c, d, b)) s.insert(b);
 	if (onSegment(a, b, c)) s.insert(c);
 	if (onSegment(a, b, d)) s.insert(d);
-	return {all(s)};
+	return {s.begin(), s.end()};
 }

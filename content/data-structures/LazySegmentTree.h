@@ -7,7 +7,7 @@
  * Can be changed to other things.
  * Use with a bump allocator for better performance, and SmallPtr or implicit indices to save memory.
  * Time: O(\log N).
- * Usage: Node* tr = new Node(v, 0, sz(v));
+ * Usage: Node* tr = new Node(v, 0, (int)v.size());
  * Status: stress-tested a bit
  */
 #pragma once
@@ -19,7 +19,7 @@ struct Node {
 	Node *l = 0, *r = 0;
 	int lo, hi, mset = inf, madd = 0, val = -inf;
 	Node(int lo,int hi):lo(lo),hi(hi){} // Large interval of -inf
-	Node(vi& v, int lo, int hi) : lo(lo), hi(hi) {
+	Node(vector<int>& v, int lo, int hi) : lo(lo), hi(hi) {
 		if (lo + 1 < hi) {
 			int mid = lo + (hi - lo)/2;
 			l = new Node(v, lo, mid); r = new Node(v, mid, hi);

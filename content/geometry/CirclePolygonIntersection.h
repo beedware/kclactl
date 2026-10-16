@@ -27,7 +27,7 @@ double circlePoly(P c, double r, vector<P> ps) {
 		return arg(p,u) * r2 + u.cross(v)/2 + arg(v,q) * r2;
 	};
 	auto sum = 0.0;
-	rep(i,0,sz(ps))
-		sum += tri(ps[i] - c, ps[(i + 1) % sz(ps)] - c);
+	for (int i = 0; i < (int)ps.size(); ++i)
+		sum += tri(ps[i] - c, ps[(i + 1) % (int)ps.size()] - c);
 	return sum;
 }

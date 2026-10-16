@@ -32,14 +32,14 @@
  */
 #pragma once
 
-ll modLog(ll a, ll b, ll m) {
-	ll n = (ll) sqrt(m) + 1, e = 1, f = 1, j = 1;
-	unordered_map<ll, ll> A;
+long long modLog(long long a, long long b, long long m) {
+	long long n = (long long) sqrt(m) + 1, e = 1, f = 1, j = 1;
+	unordered_map<long long, long long> A;
 	while (j <= n && (e = f = e * a % m) != b % m)
 		A[e * b % m] = j++;
 	if (e == b % m) return j;
 	if (__gcd(m, e) == __gcd(m, b)) 
-		rep(i,2,n+2) if (A.count(e = e * f % m))
+		for (int i = 2; i < n+2; ++i) if (A.count(e = e * f % m))
 			return n * i - A[e];
 	return -1;
 }

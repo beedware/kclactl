@@ -18,8 +18,8 @@
 
 typedef unsigned long long ull;
 ull modmul(ull a, ull b, ull M) {
-	ll ret = a * b - M * ull(1.L / M * a * b);
-	return ret + M * (ret < 0) - M * (ret >= (ll)M);
+	long long ret = a * b - M * ull(1.L / M * a * b);
+	return ret + M * (ret < 0) - M * (ret >= (long long)M);
 }
 ull modpow(ull b, ull e, ull mod) {
 	ull ans = 1;

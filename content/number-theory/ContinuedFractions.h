@@ -15,12 +15,12 @@
  */
 
 typedef double d; // for N ~ 1e7; long double for N ~ 1e9
-pair<ll, ll> approximate(d x, ll N) {
-	ll LP = 0, LQ = 1, P = 1, Q = 0, inf = LLONG_MAX; d y = x;
+pair<long long, long long> approximate(d x, long long N) {
+	long long LP = 0, LQ = 1, P = 1, Q = 0, inf = LLONG_MAX; d y = x;
 	for (;;) {
-		ll lim = min(P ? (N-LP) / P : inf, Q ? (N-LQ) / Q : inf),
-		   a = (ll)floor(y), b = min(a, lim),
-		   NP = b*P + LP, NQ = b*Q + LQ;
+		long long lim = min(P ? (N-LP)/P : inf, Q ? (N-LQ)/Q : inf);
+		long long a = (long long)floor(y), b = min(a, lim);
+		long long NP = b*P + LP, NQ = b*Q + LQ;
 		if (a > b) {
 			// If b > a/2, we have a semi-convergent that gives us a
 			// better approximation; if b = a/2, we *may* have one.

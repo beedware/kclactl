@@ -8,12 +8,12 @@
  */
 #pragma once
 
-vi Z(const string& S) {
-	vi z(sz(S));
+vector<int> Z(const string& S) {
+	vector<int> z((int)S.size());
 	int l = -1, r = -1;
-	rep(i,1,sz(S)) {
+	for (int i = 1; i < (int)S.size(); ++i) {
 		z[i] = i >= r ? 0 : min(r - i, z[i - l]);
-		while (i + z[i] < sz(S) && S[i + z[i]] == S[z[i]])
+		while (i + z[i] < (int)S.size() && S[i + z[i]] == S[z[i]])
 			z[i]++;
 		if (i + z[i] > r)
 			l = i, r = i + z[i];

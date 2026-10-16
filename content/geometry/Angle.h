@@ -8,7 +8,7 @@
  *  Sometimes also represents points or vectors.
  * Usage:
  *  vector<Angle> v = {w[0], w[0].t360() ...}; // sorted
- *  int j = 0; rep(i,0,n) { while (v[j] < v[i].t180()) ++j; }
+ *  int j = 0; for (int i = 0; i < n; ++i) { while (v[j] < v[i].t180()) ++j; }
  *  // sweeps j such that (j-i) represents the number of positively oriented triangles with vertices at 0 and i
  * Status: Used, works well
  */
@@ -29,8 +29,8 @@ struct Angle {
 };
 bool operator<(Angle a, Angle b) {
 	// add a.dist2() and b.dist2() to also compare distances
-	return make_tuple(a.t, a.half(), a.y * (ll)b.x) <
-	       make_tuple(b.t, b.half(), a.x * (ll)b.y);
+	return make_tuple(a.t, a.half(), a.y * (long long)b.x) <
+	       make_tuple(b.t, b.half(), a.x * (long long)b.y);
 }
 
 // Given two points, this calculates the smallest angle between
