@@ -18,15 +18,15 @@ help:
 	@echo "For more information see the file 'doc/README'"
 
 fast: | build
-	$(LATEXCMD) content/kactl.tex </dev/null
-	cp build/kactl.pdf kclactl.pdf
+	$(LATEXCMD) content/kclactl.tex </dev/null
+	cp build/kclactl.pdf kclactl.pdf
 
 kactl: test-session.pdf | build
-	$(LATEXCMD) content/kactl.tex && $(LATEXCMD) content/kactl.tex
-	cp build/kactl.pdf kclactl.pdf
+	$(LATEXCMD) content/kclactl.tex && $(LATEXCMD) content/kclactl.tex
+	cp build/kclactl.pdf kclactl.pdf
 
 clean:
-	cd build && rm -f kactl.aux kactl.log kactl.tmp kactl.toc kactl.pdf kactl.ptc
+	cd build && rm -f kclactl.aux kclactl.log kactl.tmp kclactl.toc kclactl.pdf kclactl.ptc
 
 veryclean: clean
 	rm -f kclactl.pdf test-session.pdf

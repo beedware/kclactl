@@ -20,7 +20,7 @@ In particular, you may want to change the cover page, or make your own choice of
 due to space concerns, not all algorithms in the repo are included in the pdf.
 You may also want to enable colored syntax highlighting.
 
-`content/kactl.tex` is the main file of KCLACTL, and can be edited to change team name, logo, syntax highlighting, etc.
+`content/kclactl.tex` is the main file of KCLACTL, and can be edited to change team name, logo, syntax highlighting, etc.
 It imports `chapter.tex` files from each of the `content/` subdirectories, which define the contents of each chapter.
 These include source code, text and math in the form of LaTeX.
 To add/remove code from a chapter, add/remove a corresponding `\kactlimport` line from the `chapter.tex` file.
