@@ -220,7 +220,8 @@ def print_header(data, outstream):
     header_length = len("".join(lines[:ind]))
     def adjust(name):
         return name if name.startswith('.') else name.split('.')[0]
-    output = r"\enspace{}".join(map(adjust, lines[:ind]))
+    # Keep the running header compact enough to coexist with the team name.
+    output = r"\enspace{}".join(map(adjust, lines[max(0, ind - 2):ind]))
     font_size = 10
     if header_length > 150:
         font_size = 8
