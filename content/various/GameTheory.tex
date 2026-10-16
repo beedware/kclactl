@@ -1,0 +1,25 @@
+% Sources: https://cp-algorithms.com/game_theory/sprague-grundy-nim.html
+% https://cp-algorithms.com/game_theory/games_on_graphs.html
+{\footnotesize
+\textbf{Sprague--Grundy.}
+For finite impartial normal-play games (unable to move means defeat),
+$g(v)=\operatorname{mex}\{g(u):v\to u\}$;
+mex is the smallest absent nonnegative integer, so terminals have $g=0$.
+Independent games, with one component played per turn, combine by xor;
+a position wins iff the xor is nonzero. If a move splits a game,
+xor the resulting components before taking mex.
+
+\textbf{Nim.}
+For heap sizes $a_i$, let $s=\bigoplus_i a_i$.
+If $s\ne0$, a winning move replaces some $a_i$ by $a_i\oplus s<a_i$.
+\textbf{Mis\`ere Nim} (last move loses): if all heaps are at most 1,
+win iff the number of ones is even; otherwise win iff $s\ne0$.
+
+\textbf{Graph games with cycles.}
+Include whose turn it is in the state when moves depend on the player.
+Under normal play, queue all terminals as losing; keep remaining outdegrees.
+Process reversed edges to unresolved predecessors: a predecessor of a losing
+state wins; for a predecessor of a winning state, decrement its remaining
+degree and mark it losing when this reaches zero. Queue newly resolved
+states. Unresolved states are draws. Time: $O(V+E)$.\par
+}
