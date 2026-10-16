@@ -2,7 +2,7 @@
  * Author: Ulf Lundstrom
  * Date: 2009-04-17
  * License: CC0
- * Source: Numeriska algoritmer med matlab, Gerd Eriksson, NADA, KTH
+ * Source: Numeriska algoritmer med matlab, Gerd Eriksson, NADA
  * Description: Finds the argument minimizing the function $f$ in the interval $[a,b]$
  * assuming $f$ is unimodal on the interval, i.e. has only one local minimum and no local
  * maximum. The maximum error in the result is $eps$. Works equally well for maximization

@@ -3,13 +3,13 @@ export TEXINPUTS=.:content/tex/:
 export max_print_line = 1048576
 
 help:
-	@echo "This makefile builds KACTL (KTH Algorithm Competition Template Library)"
+	@echo "This makefile builds KCLACTL (KCL Algorithm Competition Template Library)"
 	@echo ""
 	@echo "Available commands are:"
-	@echo "	make fast		- to build KACTL, quickly (only runs LaTeX once)"
-	@echo "	make kactl		- to build KACTL"
+	@echo "	make fast		- to build KCLACTL, quickly (only runs LaTeX once)"
+	@echo "	make kactl		- to build KCLACTL"
 	@echo "	make clean		- to clean up the build process"
-	@echo "	make veryclean		- to clean up and remove kactl.pdf"
+	@echo "	make veryclean		- to clean up and remove kclactl.pdf"
 	@echo "	make test		- to run all the stress tests in stress-tests/"
 	@echo "	make test-compiles	- to test compiling all headers"
 	@echo "	make help		- to show this information"
@@ -19,17 +19,17 @@ help:
 
 fast: | build
 	$(LATEXCMD) content/kactl.tex </dev/null
-	cp build/kactl.pdf kactl.pdf
+	cp build/kactl.pdf kclactl.pdf
 
 kactl: test-session.pdf | build
 	$(LATEXCMD) content/kactl.tex && $(LATEXCMD) content/kactl.tex
-	cp build/kactl.pdf kactl.pdf
+	cp build/kactl.pdf kclactl.pdf
 
 clean:
 	cd build && rm -f kactl.aux kactl.log kactl.tmp kactl.toc kactl.pdf kactl.ptc
 
 veryclean: clean
-	rm -f kactl.pdf test-session.pdf
+	rm -f kclactl.pdf test-session.pdf
 
 .PHONY: help fast kactl clean veryclean
 
