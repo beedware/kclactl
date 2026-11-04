@@ -1,5 +1,6 @@
 set cin aw ai is nu rnu noeb ru cul ic scs sb spr udf nowrap
 set hls cb= ts=4 sw=4 tm=50 bg=dark mouse=a shm+=sI
+" set expandtab " Optional: insert spaces instead of tabs.
 set undodir=~/.vim/undo//
 " mkdir -p ~/.vim/undo
 sy on   |   im jk <esc>   |   im kj <esc>   |   no ; :
