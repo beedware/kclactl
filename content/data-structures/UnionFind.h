@@ -4,7 +4,7 @@
  * License: CC0
  * Source: folklore
  * Description: Disjoint-set data structure.
- * Time: $O(\alpha(N))$
+ * Time: O(\alpha(N)) amortized
  */
 #pragma once
 

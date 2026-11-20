@@ -6,5 +6,5 @@ set undodir=~/.vim/undo//
 sy on   |   im jk <esc>   |   im kj <esc>   |   no ; :
 " Select region and then type :Hash to hash your selection.
 " Useful for verifying that there aren't mistypes.
-ca Hash w !cpp -dD -P -fpreprocessed \| tr -d '[:space:]' \
- \| md5sum \| cut -c-6
+ca Hash w !g++ -E -dD -P -fpreprocessed -x c++ - \
+ \| tr -d '[:space:]' \| md5sum \| cut -c-6

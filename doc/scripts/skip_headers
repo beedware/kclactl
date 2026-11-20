@@ -3,7 +3,5 @@ Unrolling.h
 MinCostMaxFlow.h
 DivideAndConquerDP.h
 ModInverse.h
-ModSqrt.h
 Hashing-codeforces.h
-NumberTheoreticTransform.h
 MoQueries.h

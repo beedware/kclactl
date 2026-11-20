@@ -1,7 +1,7 @@
 # KCLACTL
 
 This repo hosts KCLACTL, [King's College London](https://www.kcl.ac.uk/)'s ICPC team reference document.
-It consists of 25 pages of copy-pasteable C++ code, for use in ICPC-style programming competitions.
+It contains C++ code, formulas, and techniques for ICPC-style programming competitions.
 
 See [kclactl.pdf](./kclactl.pdf) for the final, browsable version, and [content/](./content/) for raw source code.
 
@@ -9,7 +9,7 @@ See [kclactl.pdf](./kclactl.pdf) for the final, browsable version, and [content/
 
 KCLACTL algorithms should be: useful, short, fast enough, well tested, and if relevant, readable and easy to modify.
 They should *not* be overly generic, since code is manually typed and that just adds overhead.
-Due to space issues, we also exclude algorithms that are very common/simple (e.g., Dijkstra), or very uncommon (general weighted matching).
+The print copy includes common routines such as BFS and Dijkstra, with additional snippets available in the source tree.
 
 If you feel that something is missing, could be cleaned up, or notice a bug, please file an issue or [send a pull request](https://help.github.com/articles/fork-a-repo/)!
 
@@ -28,7 +28,7 @@ For nicer alignment you might want to insert `\hardcolumnbreak`, `\columnbreak` 
 though this is usually only done before important contests, and not on the main branch.
 The algorithms that are not included in the pdf are left commented out in `chapter.tex`.
 
-To build KCLACTL, type `make kactl` (or `make fast`) on a \*nix machine -- this will update `kclactl.pdf`.
+To update `kclactl.pdf` on a \*nix machine, install `pdflatex`, Python 3, GNU `g++`, and `md5sum`, then run `make kactl`.
 (Windows might work as well, but is not tested.) `doc/README` has a few more notes about this.
 
 Tips:

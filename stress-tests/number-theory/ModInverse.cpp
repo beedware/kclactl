@@ -14,7 +14,7 @@ bool isPrime(int x) {
 }
 int main() {
 	rep(it,1,1000) {
-		int mod = it, LIM=1000;
+		int mod = it, LIM = it;
 		if (!isPrime(mod)) continue;
 		#include "../../content/number-theory/ModInverse.h"
 		for (int i=1; i<it; i++){

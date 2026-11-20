@@ -1,159 +1,158 @@
-Recursion
-Divide and conquer
-	Finding interesting points in N log N
-Algorithm analysis
-	Master theorem
-	Amortized time complexity
-Greedy algorithm
-	Scheduling
-	Max contiguous subvector sum
-	Invariants
-	Huffman encoding
-Graph theory
-	Dynamic graphs (extra book-keeping)
-	Breadth first search
-	Depth first search
-	* Normal trees / DFS trees
-	Dijkstra's algorithm
-	MST: Prim's algorithm
-	Bellman-Ford
-	Konig's theorem and vertex cover
-	Min-cost max flow
-	Lovasz toggle
-	Matrix tree theorem
-	Maximal matching, general graphs
-	Hopcroft-Karp
-	Hall's marriage theorem
-	Graphical sequences
-	Floyd-Warshall
-	Euler cycles
-	Flow networks
-	* Augmenting paths
-	* Edmonds-Karp
-	Bipartite matching
-	Min. path cover
-	Topological sorting
-	Strongly connected components
-	2-SAT
-	Cut vertices, cut-edges and biconnected components
-	Edge coloring
-	* Trees
-	Vertex coloring
-	* Bipartite graphs (=> trees)
-	* 3^n (special case of set cover)
-	Diameter and centroid
-	K'th shortest path
-	Shortest cycle
-Dynamic programming
-	Knapsack
-	Coin change
-	Longest common subsequence
-	Longest increasing subsequence
-	Number of paths in a dag
-	Shortest path in a dag
-	Dynprog over intervals
-	Dynprog over subsets
-	Dynprog over probabilities
-	Dynprog over trees
-	3^n set cover
-	Divide and conquer
-	Knuth optimization
-	Convex hull optimizations
-	RMQ (sparse table a.k.a 2^k-jumps)
-	Bitonic cycle
-	Log partitioning (loop over most restricted)
-Combinatorics
-	Computation of binomial coefficients
-	Pigeon-hole principle
-	Inclusion/exclusion
-	Catalan number
-	Pick's theorem
-Number theory
-	Integer parts
-	Divisibility
-	Euclidean algorithm
-	Modular arithmetic
-	* Modular multiplication
-	* Modular inverses
-	* Modular exponentiation by squaring
-	Chinese remainder theorem
-	Fermat's little theorem
-	Euler's theorem
-	Phi function
-	Frobenius number
-	Quadratic reciprocity
-	Pollard-Rho
-	Miller-Rabin
-	Hensel lifting
-	Vieta root jumping
-Game theory
-	Combinatorial games
-	Game trees
-	Mini-max
-	Nim
-	Games on graphs
-	Games on graphs with loops
-	Grundy numbers
-	Bipartite games without repetition
-	General games without repetition
-	Alpha-beta pruning
-Probability theory
-Optimization
-	Binary search
-	Ternary search
-	Unimodality and convex functions
-	Binary search on derivative
-Numerical methods
-	Numeric integration
-	Newton's method
-	Root-finding with binary/ternary search
-	Golden section search
-Matrices
-	Gaussian elimination
-	Exponentiation by squaring
-Sorting
-	Radix sort
-Geometry
-	Coordinates and vectors
-	* Cross product
-	* Scalar product
-	Convex hull
-	Polygon cut
-	Closest pair
-	Coordinate-compression
-	Quadtrees
-	KD-trees
-	All segment-segment intersection
-Sweeping
-	Discretization (convert to events and sweep)
-	Angle sweeping
-	Line sweeping
-	Discrete second derivatives
+State graphs
+Use a state for all history that affects legal next moves.
+Examples: (cell,direction), (vertex,parity), (cell,last move).
+Budget total states and transitions. Generate edges as needed.
+
+Shortest paths
+Unit edges: BFS layers give first discovery distances. Color
+by distance mod 2. For bipartiteness check every edge and BFS
+from each unvisited vertex. Weights 0/1: relax, pushing 0 front
+and 1 back to process labels in order. Nonnegative: use a heap
+and skip stale labels. The first unsettled vertex on a better
+path would have a smaller label. DAG: relax in topological
+order, even with negative weights. For multiple sources seed
+each at zero. Keep parents to reconstruct paths.
+
+Binary search and greedy
+First true: keep lo false and hi true until adjacent. Prove
+monotonicity before searching. In sorted matching, pick the
+least resource that fits. Swap its assignment with the larger
+resource used by an optimum. The larger resource also fits what
+used the smaller one.
+
+Prefix, compression, and events
+Sum [l,r) is pref[r]-pref[l]. Add to a range by adding at l,
+subtracting at r, then taking prefixes. Compress for order.
+Keep original gaps for lengths. In a sweep, account for the
+previous state before changing events at this coordinate.
+
+Monotone stack and successor sets
+For next strictly greater, scan left to right and pop smaller
+values, giving them the current index. Each pushes and pops
+once. On deleting x, join x with x+1. Each DSU component is a
+block of erased indices followed by a survivor or sentinel.
+Keep that last index as root data.
+
+Doubling and rollback
+When a vertex moves deeper in union by size, its component at
+least doubles. With rollback log only changed fields and do not
+compress. Restore k records in O(k). In small-to-large merges,
+charge each moved record to a doubling container.
+
+Offline edge lifetimes
+Use [add,remove), with Q as the end for a surviving edge.
+Normalize undirected endpoints. For a multigraph, track each
+copy or start/end an interval when multiplicity crosses zero.
+For deletions only, reverse time and use ordinary DSU.
+
+Segment tree search
+For kth, require nonnegative counts. Go left if its sum >= k,
+otherwise subtract the left sum and go right. For first value >
+x, prune nonintersecting nodes and max <= x. Use ordered leaf
+layout with a power-of-two base or explicit intervals.
+
+DP state and knapsack
+Write the cell meaning, base cases, and valid transitions.
+Histories in one cell must have the same possible futures.
+Count cells * transitions and bytes. Roll unused layers. 0-1
+knapsack scans down, unbounded scans up. Boolean 0-1
+reachability uses reach |= reach << w.
+
+Mask DP and submasks
+dp[mask][v] is a path with exactly mask ending at v. Remove v
+to prove the recurrence. Boolean existence can use one end mask
+per subset. Iterate submasks with s=(s-1)&mask, including 0
+once. All masks give 3^n pairs: bit absent, mask-only, or both.
+
+Subset and superset sums
+The subset zeta update allows each processed bit to be cleared
+once. Subtract instead of adding to invert it. For at least
+two bits in common with M, set C=full^M and let S be subset
+sums. From total weight subtract S[C] and each one-bit weight
+S[C|(1<<x)]-S[C] for x in M.
+Reverse updates for superset sums sup of frequency f. Count
+ordered pairs a|b=full by summing f[a]*sup[full^a] over a.
+Drop f[full] self-pairs and halve to count unordered pairs.
+
+Trees and parity
+XOR mark both endpoints of each extra edge. A subtree XOR
+counts edges crossing its cut mod 2. A closed tour crosses
+every cut an even number of times. A light HLD child is at most
+half its parent. Every centroid child component is at most
+half.
+
+Low links and 2-SAT
+Tree edge u-v is a bridge iff low[v]>tin[u]. Nonroot u cuts off
+child v iff low[v]>=tin[u]. Root needs two or more children.
+Skip parent by edge ID. Clause a|b yields !a->b and !b->a.
+A variable in the same SCC as its negation makes it impossible.
+
+Kruskal and residual cuts
+A minimum edge crossing a cut respecting chosen edges is safe.
+Add it to an MST, remove a crossing edge from the new cycle. In
+a residual graph after max flow, let S be reached from s. Every
+forward cut edge is full and reverse flow across it is 0.
+
+Expectations and conditioning
+E[sum indicators]=sum probabilities, with or without
+independence. In a sorted list of independent options, first
+success i has probability p[i]*product(1-p[j], j<i). Divide by
+P(any success) only when the answer conditions on it.
+
+Exact geometry
+Sign of cross(b-a,c-a) gives orientation. Widen before
+subtracting or multiplying. Shoelace is the sum of signed
+origin triangle areas. Internal edges cancel. Manhattan
+distance is max of |dx+dy| and |dx-dy|.
+
+Quadratic on a closed interval
+Test both endpoints and -B/(2A) for At^2+Bt+C if A!=0 and the
+point is inside. For variance on the hull of (E[X],E[X^2]),
+fix the mean and take an extreme second moment. On each edge,
+both moments vary linearly, so variance is quadratic.
+
+Integer arithmetic and parity
+Let q=a/b and r=a%b in C++. For b>0, floor is q-(r<0) and ceil
+is q+(r>0). If q=n/l>0, floor(n/i)=q through i=n/q. Cancel a
+gcd before multiplying. A permutation's parity is its length
+minus number of cycles, mod 2. C(n,k) is odd iff k is a
+bit-subset of n.
+
+Prefix XOR and bases
+XOR [l,r) is pref[l]^pref[r]. To maximize subarray XOR, insert
+pref[0]=0, then query each new prefix against earlier ones.
+In a trie prefer an active opposite bit. No lower bit can
+offset its gain. The first split is the highest differing bit.
+An XOR basis of rank r gives 2^r possible values. Each value
+has 2^(n-r) subsets. Taking symmetric difference with one
+witness bijects the zero-XOR subsets to those with that value.
+
 Strings
-	Longest common substring
-	Palindrome subsequences
-	Knuth-Morris-Pratt
-	Tries
-	Rolling polynomial hashes
-	Suffix array
-	Suffix tree
-	Aho-Corasick
-	Manacher's algorithm
-	Letter position lists
-Combinatorial search
-	Meet in the middle
-	Brute-force with pruning
-	Best-first (A*)
-	Bidirectional search
-	Iterative deepening DFS / A*
-Data structures
-	LCA (2^k-jumps in trees in general)
-	Pull/push-technique on trees
-	Heavy-light decomposition
-	Centroid decomposition
-	Lazy propagation
-	Self-balancing trees
-	Convex hull trick (wcipeg.com/wiki/Convex_hull_trick)
-	Monotone queues / monotone stacks / sliding queues
-	Sliding queue using 2 stacks
-	Persistent segment tree
+Use Z or prefix function with a delimiter outside the alphabet.
+Longest common substring: maximum LCP among adjacent suffixes
+from different strings. A shared prefix occupies one interval,
+so if both sources appear there, some adjacent pair differs.
+
+Constructions and debugging
+First prove necessary conditions, then build a witness. Fix a
+suffix or choose an extreme and reduce. Check length 0/1, ties,
+disconnected cases, one large value and the memory budget.
+Compare tiny random cases against an independent brute force.
+
+DP optimization
+D&C row: prove nondecreasing argmins. Solve the midpoint, then
+restrict each side by its argmin. Knuth: require
+opt(i,j-1)<=opt(i,j)<=opt(i+1,j). Search only that window.
+State ties and prove the condition for the cost formula.
+
+Divisibility and repetition
+Modular inverse exists iff gcd(a,m)=1. Stepping by k modulo n
+cycles after n/gcd(n,k) steps, the first positive t with n|tk.
+In a functional graph repeated jumps eventually cycle. Compose
+transformations by squaring to answer long jumps.
+
+Period and palindrome
+Two reflections, in a palindromic prefix of length b and in the
+whole palindrome of length a, imply period a-b. Two periods r,t
+with length >= r+t imply gcd(r,t): use one step of each size to
+obtain period |r-t|, then repeat.

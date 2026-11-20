@@ -12,7 +12,7 @@
  *
  * \textbf{Euler's thm}: $a,n$ coprime $\Rightarrow a^{\phi(n)} \equiv 1 \pmod{n}$.
  *
- * \textbf{Fermat's little thm}: $p$ prime $\Rightarrow a^{p-1} \equiv 1 \pmod{p}$ $\forall a$.
+ * \textbf{Fermat's little thm}: $p$ prime and $p\nmid a$ imply $a^{p-1}\equiv 1\pmod p$.
  * Status: Tested
  */
 #pragma once

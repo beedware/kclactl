@@ -5,7 +5,7 @@
  * Source: own work
  * Description: Container where you can add lines of the form kx+m, and query maximum values at points x.
  *  Useful for dynamic programming (``convex hull trick'').
- * Time: O(\log N)
+ * Time: O(\log N) per query or amortized per insertion
  * Status: stress-tested
  */
 #pragma once

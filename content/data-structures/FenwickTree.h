@@ -23,10 +23,12 @@ struct FT {
 	}
 	int lower_bound(ll sum) {// min pos st sum of [0, pos] >= sum
 		// Returns n if no sum is >= sum, or -1 if empty sum is.
+		// Requires nonnegative point values.
 		if (sum <= 0) return -1;
+		if (s.empty()) return 0;
 		int pos = 0;
-		for (int pw = 1 << 25; pw; pw >>= 1) {
-			if (pos + pw <= sz(s) && s[pos + pw-1] < sum)
+		for (int pw = 1 << (31 - __builtin_clz(sz(s))); pw; pw >>= 1) {
+			if (pw <= sz(s) - pos && s[pos + pw-1] < sum)
 				pos += pw, sum -= s[pos-1];
 		}
 		return pos;

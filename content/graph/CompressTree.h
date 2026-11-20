@@ -6,8 +6,8 @@
  * subtree that contains all the nodes by adding all (at most $|S|-1$)
  * pairwise LCA's and compressing edges.
  * Returns a list of (par, orig\_index) representing a tree rooted at 0.
- * The root points to itself.
- * Time: $O(|S| \log |S|)$
+ * The root points to itself. Empty input returns an empty tree.
+ * Time: O(|S| \log |S|) plus O(V) to grow shared scratch space
  * Status: Tested at CodeForces
  */
 #pragma once
@@ -16,6 +16,7 @@
 
 typedef vector<pair<int, int>> vpi;
 vpi compressTree(LCA& lca, const vi& subset) {
+	if (subset.empty()) return {};
 	static vi rev; rev.resize(sz(lca.time));
 	vi li = subset, &T = lca.time;
 	auto cmp = [&](int a, int b) { return T[a] < T[b]; };

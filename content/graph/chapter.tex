@@ -1,6 +1,10 @@
 \chapter{Graph}
 
 \section{Fundamentals}
+	\kactlimport{BFS.h}
+	\kactlimport{ZeroOneBFS.h}
+	\kactlimport{Dijkstra.h}
+	\kactlimport{Kruskal.h}
 	\kactlimport{BellmanFord.h}
 	\kactlimport{FloydWarshall.h}
 	\kactlimport{TopoSort.h}
@@ -8,7 +12,7 @@
 \section{Network flow}
 	\kactlimport{PushRelabel.h}
 	\kactlimport{MinCostMaxFlow.h}
-	\kactlimport{EdmondsKarp.h}
+	% \kactlimport{EdmondsKarp.h}
 	\kactlimport{Dinic.h}
 	\kactlimport{MinCut.h}
 	\kactlimport{GlobalMinCut.h}
@@ -51,7 +55,7 @@
 		% Test: stress-tests/graph/matrix-tree.cpp
 		Create an $N\times N$ matrix \texttt{mat}, and for each edge $a \rightarrow b \in G$, do
 		\texttt{mat[a][b]--, mat[b][b]++} (and \texttt{mat[b][a]--, mat[a][a]++} if $G$ is undirected).
-		Remove the $i$th row and column and take the determinant; this yields the number of directed spanning trees rooted at $i$
+		Remove the $i$th row and column and take the determinant; this yields the number of directed spanning trees with edges pointing away from $i$
 		(if $G$ is undirected, remove any row/column).
 
 	\subsection{Erdős–Gallai theorem}

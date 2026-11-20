@@ -11,7 +11,7 @@
  * The \texttt{lcp} array contains longest common prefixes for
  * neighbouring strings in the suffix array:
  * \texttt{lcp[i] = lcp(sa[i], sa[i-1])}, \texttt{lcp[0] = 0}.
- * The input string must not contain any nul chars.
+ * Reserve byte 0 for the sentinel. All input bytes must be below lim.
  * Time: O(n \log n)
  * Status: stress-tested
  */
@@ -19,9 +19,10 @@
 
 struct SuffixArray {
 	vi sa, lcp;
-	SuffixArray(string s, int lim=256) { // or vector<int>
+	SuffixArray(string s, int lim=256) {
 		s.push_back(0); int n = sz(s), k = 0, a, b;
-		vi x(all(s)), y(n), ws(max(n, lim));
+		vi x(n), y(n), ws(max(n, lim));
+		rep(i,0,n) x[i] = (unsigned char)s[i];
 		sa = lcp = y, iota(all(sa), 0);
 		for (int j = 0, p = 0; p < n; j = max(1, j * 2), lim = p) {
 			p = j, iota(all(y), n - j);

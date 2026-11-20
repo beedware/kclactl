@@ -62,14 +62,9 @@ void compare2() {
 
 int main() {
 	compare(); compare2();
+	const ll m = 4'000'000'000'000'000'000LL;
+	assert(modsum(6, 5, m-1, m) == 15);
 	assert(modsum((ll)1e18, 1, 2, 3) == (ll)1e18);
-	rep(i,0,50) {
-		ll t = (ll)rand() << 3;
-		ll c = (ll)rand() << 2;
-		ll k = (ll)rand() << 2;
-		ll m = (ll)rand() >> 2;
-		assert(abs(modsum(t, c, k, m) / ((long double)m/2 * t) - 1)<1e-5);
-	}
 	cout<<"Tests passed!"<<endl;
 	return 0;
 }

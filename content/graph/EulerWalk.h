@@ -6,8 +6,8 @@
  * Description: Eulerian undirected/directed path/cycle algorithm.
  * Input should be a vector of (dest, global edge index), where
  * for undirected graphs, forward/backward edges have the same index.
- * Returns a list of nodes in the Eulerian path/cycle with src at both start and end, or
- * empty list if no cycle/path exists.
+ * Returns a walk from src using every edge exactly once.
+ * The last node equals src for a circuit. Empty if no walk exists.
  * To get edge indices back, add .second to s and ret.
  * Time: O(V + E)
  * Status: stress-tested

@@ -1,25 +1,15 @@
 #include "../utilities/template.h"
 
 typedef vector<ll> vl;
-namespace ignore {
-#include "../../content/number-theory/ModPow.h"
-}
-ll modpow(ll a, ll e);
 #include "../../content/numerical/NumberTheoreticTransform.h"
-ll modpow(ll a, ll e) {
-	if (e == 0)
-		return 1;
-	ll x = modpow(a * a % mod, e >> 1);
-	return e & 1 ? x * a % mod : x;
-}
 
 vl simpleConv(vl a, vl b) {
 	int s = sz(a) + sz(b) - 1;
 	if (a.empty() || b.empty()) return {};
 	vl c(s);
 	rep(i,0,sz(a)) rep(j,0,sz(b))
-		c[i+j] = (c[i+j] + (ll)a[i] * b[j]) % mod;
-	for(auto &x: c) if (x < 0) x += mod;
+		c[i+j] = (c[i+j] + (ll)a[i] * b[j]) % nttMod;
+	for(auto &x: c) if (x < 0) x += nttMod;
 	return c;
 }
 
@@ -38,16 +28,16 @@ int main() {
 	rep(it,0,6000) {
 		a.resize(ra() % 10);
 		b.resize(ra() % 10);
-		for(auto &x: a) x = (ra() % 100 - 50+mod)%mod;
-		for(auto &x: b) x = (ra() % 100 - 50+mod)%mod;
-		for(auto &x: simpleConv(a, b)) res += (ll)x * ind++ % mod;
-		for(auto &x: conv(a, b)) res2 += (ll)x * ind2++ % mod;
+		for(auto &x: a) x = (ra() % 100 - 50+nttMod)%nttMod;
+		for(auto &x: b) x = (ra() % 100 - 50+nttMod)%nttMod;
+		for(auto &x: simpleConv(a, b)) res += (ll)x * ind++ % nttMod;
+		for(auto &x: conv(a, b)) res2 += (ll)x * ind2++ % nttMod;
 		a.resize(16);
 			vl a2 = a;
 			ntt(a2);
 			rep(k, 0, sz(a2)) {
 				ll sum = 0;
-				rep(x, 0, sz(a2)) { sum = (sum + a[x] * modpow(root, k * x * (mod - 1) / sz(a))) % mod; }
+				rep(x, 0, sz(a2)) { sum = (sum + a[x] * (ll)modpow(nttRoot, k * x * (nttMod - 1) / sz(a), nttMod)) % nttMod; }
 				assert(sum == a2[k]);
 			}
 	}

@@ -8,9 +8,9 @@ int main() {
 	vi v(N);
 	iota(all(v), 0);
 	shuffle_vec(v);
-	Node* tr = new Node(v,0,N);
+	auto tr = make_unique<Node>(v,0,N);
 	rep(i,0,N) rep(j,0,N) if (i <= j) {
-		int ma = -inf;
+		int ma = INT_MIN;
 		rep(k,i,j) ma = max(ma, v[k]);
 		assert(ma == tr->query(i,j));
 	}
@@ -22,7 +22,7 @@ int main() {
 		int r = rand() % 100;
 		if (r < 30) {
 			int res = tr->query(i, j);
-			int ma = -inf;
+			int ma = INT_MIN;
 			rep(k,i,j) ma = max(ma, v[k]);
 			assert(ma == res);
 		}

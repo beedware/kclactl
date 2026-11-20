@@ -3,8 +3,8 @@
  * Date: 2018-07-15
  * License: CC0
  * Source: Wikipedia
- * Description: Given $N$ and a real number $x \ge 0$, finds the closest rational approximation $p/q$ with $p, q \le N$.
- * It will obey $|p/q - x| \le 1/qN$.
+ * Description: Given $N\ge 1$ and a real number $x\ge 0$, finds
+ * the closest rational approximation $p/q$ with $p,q\le N$.
  *
  * For consecutive convergents, $p_{k+1}q_k - q_{k+1}p_k = (-1)^k$.
  * ($p_k/q_k$ alternates between $>x$ and $<x$.)
@@ -16,6 +16,7 @@
 
 typedef double d; // for N ~ 1e7; long double for N ~ 1e9
 pair<ll, ll> approximate(d x, ll N) {
+	if (x >= N) return {N, 1};
 	ll LP = 0, LQ = 1, P = 1, Q = 0, inf = LLONG_MAX; d y = x;
 	for (;;) {
 		ll lim = min(P ? (N-LP) / P : inf, Q ? (N-LQ) / Q : inf),
